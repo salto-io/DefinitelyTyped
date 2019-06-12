@@ -113,6 +113,35 @@ interface DeployOptions {
     singlePackage?:	boolean;
 }
 
+interface PicklistEntry {
+    active: boolean;
+    defaultValue: boolean;
+    label: string;
+    validFor: string;
+    value: string;
+  }
+
+  interface ValueTypeField {
+    fields: ValueTypeField[];
+    foreignKeyDomain: string;
+    isForeignKey: boolean;
+    isNameField: boolean;
+    minOccurs: number;
+    name: string;
+    picklistValues: PicklistEntry[];
+    soapType: string;
+    valueRequired: boolean;
+  }
+
+  interface DescribeValueTypeResult {
+    apiCreatable: boolean;
+    apiDeletable: boolean;
+    apiReadable: boolean;
+    apiUpdatable: boolean;
+    parentField: ValueTypeField;
+    ValueTypeFields: ValueTypeField[];
+  }
+
 export class AsyncResultLocator<T> extends EventEmitter implements PromiseLike<T> {
     check(callback?: Callback<T>): Promise<T>
 
@@ -157,6 +186,8 @@ export class Metadata {
 
     describe(version?: string, callback?: Callback<DescribeMetadataResult>): Promise<DescribeMetadataResult>;
 
+    describeValueType(type: string, version?: string, callback?: Callback<DescribeValueTypeResult>): Promise<DescribeValueTypeResult>
+    
     list(queries: ListMetadataQuery | Array<ListMetadataQuery>, version?: string, callback?: Callback<Array<FileProperties>>): Promise<Array<FileProperties>>;
 
     read(type: string, fullNames: string | string[], callback?: Callback<MetadataInfo | Array<MetadataInfo>>): Promise<MetadataInfo | Array<MetadataInfo>>;
