@@ -667,6 +667,10 @@ function Argv$showHelpConsoleLevel() {
     yargs.showHelp("log"); // prints to stdout using console.log()
 }
 
+function Argv$showHelpPrinter() {
+    yargs.showHelp(o => console.log(o)); // prints to stdout using the specified function
+}
+
 function Argv$getCompletion() {
     const ya = yargs
         .option('foobar', {})

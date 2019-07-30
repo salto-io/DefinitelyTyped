@@ -484,9 +484,10 @@ declare namespace yargs {
 
         /**
          * Print the usage data using the console function consoleLevel for printing.
-         * @param [consoleLevel='error']
+         * @param consoleLevel If `string`, it is used as the name of the console function to call. It defaults to "error".
+         * If `Printer`, it calls the specified function to print.
          */
-        showHelp(consoleLevel?: string): Argv<T>;
+        showHelp(consoleLevel?: string | Printer): Argv<T>;
 
         /**
          * By default, yargs outputs a usage string if any error is detected.
@@ -755,6 +756,7 @@ declare namespace yargs {
     type MiddlewareFunction<T = {}> = (args: Arguments<T>) => void;
     type Choices = ReadonlyArray<string | number | true | undefined>;
     type PositionalOptionsType = "boolean" | "number" | "string";
+    type Printer = (o: any) => void;
 }
 
 declare var yargs: yargs.Argv;
